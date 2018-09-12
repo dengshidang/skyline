@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.WalletinfoMapper">
+
+  	<sql id="base_line">
+		id,walletIp,walletPort,account,pwd,walletName,walletEng,walletPwd,blockheight,walletaccount,propertyid,confirm,status,createTime,updateTime
+	</sql>
+	
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.WalletinfoEntity" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="walletIp" property="walletIp" jdbcType="INTEGER" />
+	    <result column="walletPort" property="walletPort" jdbcType="INTEGER" />
+	    <result column="account" property="account" jdbcType="VARCHAR" />
+	    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+	    <result column="walletName" property="walletName" jdbcType="VARCHAR" />
+	    <result column="walletEng" property="walletEng" jdbcType="VARCHAR" />
+	    <result column="walletPwd" property="walletPwd" jdbcType="VARCHAR" />
+	    <result column="blockheight" property="blockheight" jdbcType="INTEGER" />
+	    <result column="walletaccount" property="walletaccount" jdbcType="VARCHAR" />
+	    <result column="propertyid" property="propertyid" jdbcType="INTEGER" />
+	    <result column="confirm" property="confirm" jdbcType="INTEGER" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  <select id="queryWalletByCoin" resultMap="baseResultMap">
+  	select
+  		<include refid="base_line"/>
+  	from 
+  		se_t_walletinfo
+  	where 
+  		id in(select walletId from se_t_coininfo where id = #{value})
+  </select>
+
+  <select id="queryWalletByEng" resultMap="baseResultMap" parameterType="java.lang.String" >
+  	SELECT
+		<include refid="base_line"/>
+	FROM
+		se_t_walletinfo 
+	WHERE
+		status=0 and walletEng = #{value}
+  </select>
+  
+  <update id="updateWalletInfo" parameterType="com.skyline.common.entity.WalletinfoEntity">
+	update se_t_walletinfo
+	<trim prefix="set" suffixOverrides=",">
+	  <if test="blockheight!=null">blockheight=#{blockheight},</if>
+	</trim>
+	where walletEng =#{walletEng}
+  </update>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.UserextractCoinMapper">
+	<!-- 查询用户对应地址信息 -->
+	<select id="getSeTUserextractCoinList" resultType="com.skyline.common.entity.UserextractCoinEntity" parameterType="com.skyline.common.entity.UserextractCoinEntity">
+		SELECT id,userId,ecAddress,coinType,coinId,isdefault,status,createTime,updateTime
+		 FROM
+			se_t_userextract_coin
+			WHERE 1=1
+			<if test="userId!=null">
+				and userId=#{userId}
+			</if>
+	</select>
+	<!-- 新增用户提币地址 -->
+	<insert id="addSeTUserextractCoin" parameterType="com.skyline.common.entity.UserextractCoinEntity">
+		insert into se_t_userextract_coin(userId,ecAddress,coinType,coinId,isdefault,status,createTime,updateTime)value(
+			#{userId},#{ecAddress},#{coinType},#{coinId},#{isdefault},#{status},#{createTime},#{updateTime})
+	</insert>
+</mapper>

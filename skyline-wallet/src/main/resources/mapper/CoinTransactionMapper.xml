@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.CoinTransactionMapper">
+
+	<sql id="base_line">
+		id,orderNo,userId,coinName,txId,walletaddress,amount,fee,confirmations,coinId,categroy,status,remark,createTime,updateTime
+	</sql>
+	
+	<sql id="show_line">
+		ca.id,ca.orderNo,ca.userId,ca.coinName,c.img,c.outMin,c.outMax,ca.txId,ca.walletaddress,ca.amount,ca.fee,ca.confirmations,ca.coinId,ca.categroy,ca.status,ca.remark,ca.createTime,ca.updateTime
+	</sql>
+	
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.CointransactionEntity" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+	    <result column="userId" property="userId" jdbcType="INTEGER" />
+	    <result column="coinName" property="coinName" jdbcType="VARCHAR" />
+	    <result column="txId" property="txId" jdbcType="VARCHAR" />
+	    <result column="walletaddress" property="walletaddress" jdbcType="VARCHAR" />
+	    <result column="amount" property="amount" jdbcType="DOUBLE" />
+	    <result column="fee" property="fee" jdbcType="DOUBLE" />
+	    <result column="confirmations" property="confirmations" jdbcType="INTEGER" />
+	    <result column="coinId" property="coinId" jdbcType="INTEGER" />
+	    <result column="categroy" property="categroy" jdbcType="INTEGER" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="remark" property="remark" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  	<resultMap id="showResultMap" type="com.skyline.common.vo.CointransactionVO" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+	    <result column="userId" property="userId" jdbcType="INTEGER" />
+	    <result column="coinName" property="coinName" jdbcType="VARCHAR" />
+	    <result column="img" property="coinImg" jdbcType="VARCHAR" />
+	    <result column="txId" property="txId" jdbcType="VARCHAR" />
+	    <result column="walletaddress" property="walletaddress" jdbcType="VARCHAR" />
+	    <result column="amount" property="amount" jdbcType="DOUBLE" />
+	    <result column="fee" property="fee" jdbcType="DOUBLE" />
+	    <result column="confirmations" property="confirmations" jdbcType="INTEGER" />
+	    <result column="coinId" property="coinId" jdbcType="INTEGER" />
+	    <result column="categroy" property="categroy" jdbcType="INTEGER" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="remark" property="remark" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	<select id="queryCoinTransactionByHash" parameterType="java.lang.String" resultMap="baseResultMap">
+		select
+			<include refid="base_line"/>
+		from
+			se_t_cointransaction
+		where
+			txId = #{value} and categroy = 0
+	</select>
+	
+	<select id="queryCoinTransaction" parameterType="com.skyline.common.entity.CointransactionEntity" resultMap="showResultMap">
+		select
+			<include refid="show_line"/>
+		from
+			se_t_cointransaction as ca
+		left join
+			se_t_coininfo as c
+		on 
+			ca.coinId = c.id
+		where
+			1 = 1
+		<if test="userId != null">
+			and ca.userId = #{userId}
+		</if>
+		<if test="coinId != null">
+			and ca.coinId = #{coinId}
+		</if>
+		<if test="coinName != null and coinName !=''">
+			and ca.coinName like CONCAT('%',#{coinName},'%')
+		</if>
+		<if test="categroy != null">
+			and ca.categroy = #{categroy}
+		</if>
+		<if test="status != null">
+			and ca.status = #{status}
+		</if>
+		order by ca.createTime desc
+	</select>
+	
+</mapper>

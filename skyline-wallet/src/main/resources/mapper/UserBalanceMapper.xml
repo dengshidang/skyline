@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.UserBalanceMapper">
+	
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.Userbalance" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="userId" property="userId" jdbcType="INTEGER" />
+	    <result column="coinId" property="coinId" jdbcType="INTEGER" />
+	    <result column="totalNum" property="totalNum" jdbcType="DOUBLE" />
+	    <result column="frozenNum" property="frozenNum" jdbcType="DOUBLE" />
+	    <result column="validNum" property="validNum" jdbcType="DOUBLE" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	
+	<sql id="base_line">
+		id,userId,coinId,totalNum,frozenNum,validNum,status,createTime,updateTime
+	</sql>
+	
+	<select id="queryUserBalance" parameterType="com.skyline.common.entity.Userbalance" resultMap="baseResultMap">
+		select
+			<include refid="base_line"/>
+		from 
+			se_t_userbalance
+		where
+			1 = 1
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="userId != null">
+				and userId = #{userId}
+			</if>
+			<if test="coinId != null">
+				and coinId = #{coinId}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+
+	</select>
+	<!-- 查询用户币种余额 -->
+
+	<select id="getUserBalance"  resultType="com.skyline.common.vo.UserbalanceVO">
+		SELECT b.id,b.coinId,c.`name` as coinName,c.img,b.totalNum,b.frozenNum,b.validNum,mk.usdRatio,mk.cnyRatio,mk.euroRatio 
+		from se_t_userbalance b 
+		LEFT JOIN se_t_coininfo c on b.coinId=c.id 
+		LEFT JOIN se_t_coinmarketprice mk on b.coinId=mk.coinId
+		where b.userId=#{userId} and b.`status`=0 and b.coinId=#{coinId}
+	</select>
+	
+	<select id="getUserBalanceList"  resultType="com.skyline.common.vo.UserbalanceVO"> 
+			SELECT b.id,b.coinId,c.`name` as coinName,c.img,b.totalNum,b.frozenNum,b.validNum,mk.usdRatio,mk.cnyRatio,mk.euroRatio 
+		from se_t_userbalance b 
+		LEFT JOIN se_t_coininfo c on b.coinId=c.id 
+		LEFT JOIN se_t_coinmarketprice mk on b.coinId=mk.coinId
+		where b.userId=#{userId} and b.`status`=0
+	</select>
+	<!-- 查询指定用户币种总额 -->
+	<select id="querySeTUserbalanceSingle" parameterType="com.skyline.common.entity.Userbalance" resultType="com.skyline.common.entity.Userbalance">
+		SELECT
+			<include refid="base_line"/> 
+		FROM
+			se_t_userbalance
+		WHERE
+			`status`=0
+			AND userId=#{userId}
+			AND coinId=#{coinId}
+	</select>
+	
+	<!--修改币种总额-->
+	<update id="updateUserBalance" parameterType="com.skyline.common.entity.Userbalance">
+		update se_t_userbalance 
+		<trim prefix="set" suffixOverrides=",">
+		  <if test="totalNum!=null">totalNum=#{totalNum},</if>
+		  <if test="frozenNum!=null">frozenNum=#{frozenNum},</if>
+		  <if test="validNum!=null ">validNum=#{validNum},</if>
+		  <if test="updateTime!=null">updateTime=#{updateTime}</if>
+		</trim>
+		where userId=#{userId} and coinId=#{coinId}
+	</update>
+	
+</mapper>

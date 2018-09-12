@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.WalletaddrMapper">
+
+	<sql id="base_line">
+		id,address,addresskey,walletName,walletId,userId,coinId,coinName,status,createTime,updateTime
+	</sql>
+	
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.SeTWalletaddrEntity" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />
+	    <result column="addresskey" property="addresskey" jdbcType="VARCHAR" />
+	    <result column="walletName" property="walletName" jdbcType="VARCHAR" />
+	    <result column="userId" property="userId" jdbcType="INTEGER" />
+	    <result column="coinId" property="coinId" jdbcType="INTEGER" />
+	    <result column="coinName" property="coinName" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+
+	<!-- 查询钱包地址对应得用户信息 -->
+	<select id="queryWalletAddress" parameterType="java.lang.String" resultMap="baseResultMap">
+		select 
+			<include refid="base_line"/>
+		from 
+			se_t_walletaddr 
+		where 
+			address=#{address}
+	</select>
+	
+	<!-- 查询用户对应的币种钱包地址 -->
+	<select id="queryUserWalletAddress" resultMap="baseResultMap" parameterType="java.util.Map">
+		select
+			<include refid="base_line"/>
+		from 
+			se_t_walletaddr 
+		where 
+			userId=#{userId} and walletId =#{walletId} and status=0
+	</select>
+	
+	<insert id="addUserWalletAddress" parameterType="com.skyline.common.entity.SeTWalletaddrEntity">
+		insert into se_t_walletaddr(address,addresskey,walletName,walletId,userId,coinId,coinName,status,createTime,updateTime) VALUES
+			(#{address},#{addresskey},#{walletName},#{walletId},#{userId},#{coinId},#{coinName},DEFAULT,#{createTime},#{updateTime})
+	</insert>
+	
+	<update id="updateWalletAddress" parameterType="com.skyline.common.entity.SeTWalletaddrEntity">
+		update se_t_walletaddr set status=#{status} where id=#{id}
+	</update>
+</mapper>

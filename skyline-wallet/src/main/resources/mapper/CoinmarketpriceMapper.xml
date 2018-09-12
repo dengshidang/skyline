@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.wallet.mapper.CoinmarketpriceMapper">
+	
+	<!-- 查询币种市价信息 -->
+	<select id="getCoinmarketprice"   resultType="com.skyline.common.entity.Coinmarketprice" >
+		SELECT k.id,k.coinId,k.usdRatio,k.cnyRatio,k.euroRatio
+		 FROM se_t_coinmarketprice k 
+		 LEFT JOIN   se_t_coininfo c ON k.coinId=c.id
+		<where>
+			<if test="coinId!=null">
+				and  k.coinId=#{coinId}
+			</if> 
+			<if test="coinName!=null and coinName!=''">
+				and  c.name=#{coinName}
+			</if> 
+		</where>
+	</select>
+</mapper>
