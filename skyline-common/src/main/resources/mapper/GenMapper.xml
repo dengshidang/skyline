@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itlead.etl.mgr.mapper.GenMapper">
+
+	<select id="queryBySql" parameterType="java.lang.String"
+		resultType="java.util.LinkedHashMap">
+         <![CDATA[
+         	  ${sql}
+         ]]>
+	</select>
+
+	<select id="queryBySqlParam" resultType="java.util.LinkedHashMap">
+		SELECT
+		<if test="params != null">
+			<foreach collection="params" item="item" separator=",">
+				${item}
+			</foreach>
+		</if>
+		<if test="params == null">
+			*
+		</if>
+		FROM
+		${table}
+		<if test="sortSrt != null and sortSrt !='' and sortSrt != 'null'">
+			ORDER BY ${sortSrt}
+		</if>
+	</select>
+
+</mapper>
