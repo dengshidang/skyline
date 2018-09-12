@@ -1,0 +1,230 @@
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=70, orderNo=CP1808161354580083, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 13:54:34, updateTime=2018-08-16 13:54:34]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5015.0, validNum=4986.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 13:54:35]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161354580083","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 13:54:34"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=71, orderNo=CP1808161357579276, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 13:57:18, updateTime=2018-08-16 13:57:18]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5025.0, validNum=4976.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 13:57:18]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161357579276","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 13:57:18"}
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=72, orderNo=CP1808161357586654, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=5.0, dealSum=null, price=1.0, fee=0.1, status=0, createTime=2018-08-16 13:57:47, updateTime=2018-08-16 13:57:47]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 157.0:5.0
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=162.0, validNum=850.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 13:57:47]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161357586654","price":1,"type":1,"marketId":8,"sendTime":"2018-08-16 13:57:47"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161357586654","price":1,"type":1,"marketId":8,"sendTime":"2018-08-16 13:57:47"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161357586654---------→CP1808161354580083
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=73, orderNo=CP1808161358814763, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=5.0, dealSum=null, price=1.0, fee=0.1, status=0, createTime=2018-08-16 13:58:59, updateTime=2018-08-16 13:58:59]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 162.0:5.0
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=167.0, validNum=845.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 13:59:00]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161358814763","price":1,"type":1,"marketId":8,"sendTime":"2018-08-16 13:58:59"}
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=74, orderNo=CP1808161359807766, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 13:59:13, updateTime=2018-08-16 13:59:13]
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5035.0, validNum=4966.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 13:59:13]
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161359807766","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 13:59:13"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161359807766","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 13:59:13"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=75, orderNo=CP1808161404738324, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:04:50, updateTime=2018-08-16 14:04:50]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5045.0, validNum=4956.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:04:50]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161404738324","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:04:50"}
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=76, orderNo=CP1808161406210052, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:06:30, updateTime=2018-08-16 14:06:30]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5055.0, validNum=4946.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:06:31]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161406210052","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:06:30"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161406210052","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:06:30"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=77, orderNo=CP1808161416471751, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:16:00, updateTime=2018-08-16 14:16:00]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5065.0, validNum=4936.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:16:00]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161416471751","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:16:00"}
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=78, orderNo=CP1808161421850272, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:21:09, updateTime=2018-08-16 14:21:09]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5075.0, validNum=4926.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:21:09]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161421850272","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:09"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161421850272","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:09"}
+INFO http-nio-9001-exec-4 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=79, orderNo=CP1808161421520779, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:21:13, updateTime=2018-08-16 14:21:13]
+INFO http-nio-9001-exec-4 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5085.0, validNum=4916.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:21:13]
+INFO http-nio-9001-exec-4 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161421520779","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:13"}
+INFO http-nio-9001-exec-5 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=80, orderNo=CP1808161421689244, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:21:37, updateTime=2018-08-16 14:21:37]
+INFO http-nio-9001-exec-5 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5095.0, validNum=4906.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:21:37]
+INFO http-nio-9001-exec-5 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161421689244","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:37"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161421689244","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:37"}
+INFO http-nio-9001-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=81, orderNo=CP1808161421903170, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.1, status=0, createTime=2018-08-16 14:21:50, updateTime=2018-08-16 14:21:50]
+INFO http-nio-9001-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=10001.6402, frozenNum=5105.0, validNum=4896.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:21:50]
+INFO http-nio-9001-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161421903170","price":2,"type":0,"marketId":8,"sendTime":"2018-08-16 14:21:50"}
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=82, orderNo=CP1808161422521417, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:09, updateTime=2018-08-16 14:22:09]
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - 167.0:5.0
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=172.0, validNum=840.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:09]
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422521417","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:09"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161422521417","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:09"}
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=83, orderNo=CP1808161422339160, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:14, updateTime=2018-08-16 14:22:14]
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - 172.0:5.0
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=177.0, validNum=835.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:14]
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422339160","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:14"}
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=84, orderNo=CP1808161422365680, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:24, updateTime=2018-08-16 14:22:24]
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - 177.0:5.0
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=182.0, validNum=830.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:25]
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422365680","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:24"}
+INFO http-nio-9001-exec-10 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=85, orderNo=CP1808161422631189, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:28, updateTime=2018-08-16 14:22:28]
+INFO http-nio-9001-exec-10 com.skyline.clientService.business.impl.TradeBusinessImpl - 182.0:5.0
+INFO http-nio-9001-exec-10 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1012.56, frozenNum=187.0, validNum=825.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:28]
+INFO http-nio-9001-exec-10 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422631189","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:28"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161422521417---------→CP1808161421689244
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=86, orderNo=CP1808161422884717, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:36, updateTime=2018-08-16 14:22:36]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 182.0:5.0
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1007.56, frozenNum=187.0, validNum=820.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:37]
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422884717","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:36"}
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=87, orderNo=CP1808161422603895, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:42, updateTime=2018-08-16 14:22:42]
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - 187.0:5.0
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1007.56, frozenNum=192.0, validNum=815.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:42]
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422603895","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:42"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":5,"orderNo":"CP1808161422603895","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:42"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161422603895---------→CP1808161421850272
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=88, orderNo=CP1808161422245437, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=5.0, dealNum=null, number=10.0, dealSum=null, price=2.0, fee=0.2, status=0, createTime=2018-08-16 14:22:50, updateTime=2018-08-16 14:22:50]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 187.0:5.0
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=1002.56, frozenNum=192.0, validNum=810.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-16 14:22:50]
+INFO http-nio-9001-exec-3 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":5,"orderNo":"CP1808161422245437","price":2,"type":1,"marketId":8,"sendTime":"2018-08-16 14:22:50"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":11,"orderNo":"CP1808161433971426","price":1,"type":0,"marketId":8,"sendTime":"2018-08-16 14:33:24"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808161709719467","price":1,"type":1,"marketId":8,"sendTime":"2018-08-16 17:09:46"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808161941587112","price":1,"type":0,"marketId":8,"sendTime":"2018-08-16 19:41:57"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161422339160---------→CP1808161421903170
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161422365680---------→CP1808161421520779
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808161422631189---------→CP1808161416471751
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808161956349491","price":1,"type":0,"marketId":8,"sendTime":"2018-08-16 19:56:38"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808161958722793","price":1,"type":0,"marketId":8,"sendTime":"2018-08-16 19:58:57"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=89, orderNo=CP1808170017811714, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=2.0, dealSum=null, price=2.0, fee=0.02, status=0, createTime=2018-08-17 00:17:19, updateTime=2018-08-17 00:17:19]
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=9951.6402, frozenNum=5057.0, validNum=4894.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 00:17:19]
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808170017811714","price":2,"type":0,"marketId":8,"sendTime":"2018-08-17 00:17:19"}
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=90, orderNo=CP1808170017926939, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=2.0, dealSum=null, price=2.0, fee=0.02, status=0, createTime=2018-08-17 00:17:23, updateTime=2018-08-17 00:17:23]
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=9951.6402, frozenNum=5059.0, validNum=4892.6402, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 00:17:23]
+INFO http-nio-9001-exec-8 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808170017926939","price":2,"type":0,"marketId":8,"sendTime":"2018-08-17 00:17:23"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808170017926939","price":2,"type":0,"marketId":8,"sendTime":"2018-08-17 00:17:23"}
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=91, orderNo=CP1808170017962633, marketId=8, type=1, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=1.8, dealSum=null, price=1.8, fee=0.036, status=0, createTime=2018-08-17 00:17:43, updateTime=2018-08-17 00:17:43]
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - 177.0:1.0
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=3, userId=37, coinId=5, totalNum=987.56, frozenNum=178.0, validNum=809.56, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 00:17:43]
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808170017962633","price":1.8,"type":1,"marketId":8,"sendTime":"2018-08-17 00:17:43"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=92, orderNo=CP1808171540870996, marketId=8, type=0, userId=37, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=2.0, dealSum=null, price=2.0, fee=0.02, status=0, createTime=2018-08-17 15:40:53, updateTime=2018-08-17 15:40:53]
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=4, userId=37, coinId=6, totalNum=100047.4, frozenNum=94.0, validNum=99953.4, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 15:40:54]
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808171540870996","price":2,"type":0,"marketId":8,"sendTime":"2018-08-17 15:40:53"}
+INFO http-nio-9123-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=93, orderNo=CP1808171541139851, marketId=8, type=1, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=0.6, dealSum=null, price=0.6, fee=0.012, status=0, createTime=2018-08-17 15:41:15, updateTime=2018-08-17 15:41:15]
+INFO http-nio-9123-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - 5021.0:1.0
+INFO http-nio-9123-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=7, userId=143, coinId=5, totalNum=10010.8, frozenNum=5022.0, validNum=4988.8, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 15:41:15]
+INFO http-nio-9123-exec-2 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808171541139851","price":0.6,"type":1,"marketId":8,"sendTime":"2018-08-17 15:41:15"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808171541139851","price":0.6,"type":1,"marketId":8,"sendTime":"2018-08-17 15:41:15"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808171541139851---------→CP1808170017811714
+INFO http-nio-9123-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=90, orderNo=CP1808170017926939, marketId=8, type=0, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=2.0, dealSum=null, price=2.0, fee=0.02, status=3, createTime=2018-08-17 00:17:23, updateTime=2018-08-17 15:45:12]
+INFO http-nio-9123-exec-7 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=9, userId=143, coinId=6, totalNum=9951.6202, frozenNum=5055.0, validNum=4896.6202, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 15:45:12]
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=94, orderNo=CP1808171618166125, marketId=8, type=1, userId=143, precoinId=6, precoinName=USDT, sufcoinId=5, sufcoinName=ETH, totalNum=1.0, dealNum=null, number=0.6, dealSum=null, price=0.6, fee=0.012, status=0, createTime=2018-08-17 16:18:05, updateTime=2018-08-17 16:18:05]
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - 5021.0:1.0
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=7, userId=143, coinId=5, totalNum=10010.76, frozenNum=5022.0, validNum=4988.76, status=0, createTime=2018-07-20 09:36:33, updateTime=2018-08-17 16:18:05]
+INFO http-nio-9123-exec-6 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":1,"orderNo":"CP1808171618166125","price":0.6,"type":1,"marketId":8,"sendTime":"2018-08-17 16:18:05"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808171649771336","price":11,"type":1,"marketId":8,"sendTime":"2018-08-17 16:49:31"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808171701631382","price":1,"type":1,"marketId":8,"sendTime":"2018-08-17 17:01:41"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和失败！2018-08-17 17:02:02订单号为：CP1808171701631382---------→CP1808170017926939
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 其中：:订单 <CP1808170017926939> 不存在或已撤销:订单 <CP1808171701631382> 不存在或已撤销
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":6,"orderNo":"CP1808181045404597","price":5,"type":0,"marketId":9,"sendTime":"2018-08-18 10:45:53"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808181052967583","price":1,"type":0,"marketId":14,"sendTime":"2018-08-18 10:52:09"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":1,"orderNo":"CP1808181348227776","price":1,"type":1,"marketId":9,"sendTime":"2018-08-18 13:48:10"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":3,"orderNo":"CP1808181348391430","price":5,"type":0,"marketId":9,"sendTime":"2018-08-18 13:48:46"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.RabbitInfo - 戳和交易达成:CP1808181348227776---------→CP1808181348391430
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-5 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-5 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-6 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-6 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-2 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO http-nio-9001-exec-4 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-4 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-1 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-28 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-28 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-18 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-18 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-34 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-34 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-38 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-38 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-7 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-13 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-13 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-34 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-34 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:买方数据获取失败！
+INFO http-nio-9001-exec-9 com.skyline.clientService.business.impl.TradeCordeImpl - E00328:卖方数据获取失败！
+INFO http-nio-9001-exec-21 com.skyline.clientService.business.impl.TradeBusinessImpl - SeTTradeinfoEntity [id=95, orderNo=CP1808182241346563, marketId=9, type=1, userId=1026, precoinId=5, precoinName=ETH, sufcoinId=6, sufcoinName=USDT, totalNum=2.0, dealNum=null, number=2.0, dealSum=null, price=1.0, fee=0.04, status=0, createTime=2018-08-18 22:41:56, updateTime=2018-08-18 22:41:56]
+INFO http-nio-9001-exec-21 com.skyline.clientService.business.impl.TradeBusinessImpl - 0.0:2.0
+INFO http-nio-9001-exec-21 com.skyline.clientService.business.impl.TradeBusinessImpl - Userbalance [id=28, userId=1026, coinId=6, totalNum=1000.0, frozenNum=2.0, validNum=998.0, status=0, createTime=2018-08-18 09:25:52, updateTime=2018-08-18 22:41:56]
+INFO http-nio-9001-exec-21 com.skyline.clientService.business.impl.TradeBusinessImpl - 消息推送成功：{"number":2,"orderNo":"CP1808182241346563","price":1,"type":1,"marketId":9,"sendTime":"2018-08-18 22:41:56"}
+INFO SimpleAsyncTaskExecutor-93 com.skyline.clientService.queue.RabbitInfo - 接受信息推送通知：{"number":2,"orderNo":"CP1808182241346563","price":1,"type":1,"marketId":9,"sendTime":"2018-08-18 22:41:56"}
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 清除无效记录：0条
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 清除无效记录：3条
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 清除无效记录：3条
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 清除无效记录：3条
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------
+INFO SimpleAsyncTaskExecutor-1 com.skyline.clientService.queue.TradeListening - 智能戳和交易队列信息初始化---------------------

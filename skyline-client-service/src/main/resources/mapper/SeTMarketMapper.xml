@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.clientService.mapper.SeTMarketMapper">
+
+	
+	<select id="queryType" resultType="java.util.Map">
+		select precoinId,precoinName from se_t_market group by precoinId,precoinName
+	</select>
+	
+	<select id="queryMarketByType"  resultType ="com.skyline.common.vo.TradePrecoinEntityVO">
+		select precoinId,precoinName,sufcoinId,sufcoinName,marketName
+		
+		from se_t_market where precoinId = #{precoinId}
+	</select>
+	
+	<!-- 获取所有行情 -->
+   <select id="getMarket" resultType="com.skyline.common.vo.TradePrecoinEntityVO" >
+
+SELECT 
+    m.precoinId,m.sufcoinId,m.precoinName,m.sufcoinName,m.id AS marketId,m.marketName,
+   re.newPrice,re.newTime,(re.newPrice-re.oprice)/re.oprice AS gains
+FROM se_t_market AS m
+left JOIN 
+<![CDATA[
+(SELECT n.price newPrice,n.createTime AS newTime, n.marketId,   
+     (SELECT DISTINCT o.price
+      FROM se_t_traderecord o
+       WHERE o.createTime IN
+      (SELECT MAX(createTime)
+             FROM   se_t_traderecord
+               WHERE   STATUS=0 
+		  AND  TO_DAYS(NOW())-TO_DAYS(createTime)>=1
+		  AND  marketId =n.marketId )
+		  ORDER BY id  DESC LIMIT 0,1 ) AS oprice     
+  FROM   se_t_traderecord AS n    
+   WHERE  
+      n.id in( select MAX(id)
+             FROM   se_t_traderecord
+               WHERE   STATUS=0 
+		  AND  TO_DAYS(createTime)<=TO_DAYS(NOW()) 
+		  GROUP BY marketId)
+		  GROUP BY marketId
+   ) AS re
+   ]]>
+ ON   m.id = re.marketId 
+WHERE m.precoinId = #{precoinId}
+     <if test="keyword !=null and keyword !=''">
+        and (
+             precoinName like CONCAT("%",#{keyword},"%") 
+             or
+             sufcoinName like CONCAT("%",#{keyword},"%")
+        )
+     </if>
+      group by m.precoinId
+    <if test="type == 1 ">
+        order by sufcoinName ${sort}  
+    </if>
+    
+    <if test="type ==2 ">
+      order by newPrice ${sort}
+    </if>
+ 
+    <if test="type == 3 ">
+       order by gains ${sort}
+    </if>
+     
+   </select>
+   
+   
+   
+   <!--获取当前行情信息  -->
+   <select id="getCurrentMarket" resultType="com.skyline.common.vo.TradePrecoinEntityVO">
+   
+   SELECT m.precoinName,m.sufcoinName,m.id AS marketId,m.marketName,re.newPrice, m.precoinId,m.sufcoinId,  
+        (re.newPrice*(SELECT cnyRatio FROM se_t_coinmarketprice WHERE coinId = m.precoinId AND STATUS = 0))AS cny,
+        re.newTime,(re.newPrice-re.oprice)/re.oprice AS gains,re.high,re.low,re.tradeTotal,
+        (SELECT img FROM se_t_coininfo WHERE id = m.precoinId) AS coinLog
+FROM se_t_market AS m,
+  <![CDATA[
+( SELECT n.price newPrice,n.createTime AS newTime, n.marketId,   
+     (SELECT DISTINCT o.price
+      FROM se_t_traderecord o
+       WHERE o.createTime IN
+            (SELECT MAX(createTime)
+             FROM   se_t_traderecord
+               WHERE   STATUS=0 
+		  AND  TO_DAYS(NOW())-TO_DAYS(createTime)>=1
+		  AND  marketId =n.marketId )
+      AND  marketId =n.marketId
+      ORDER BY id  DESC LIMIT 0,1 ) AS oprice  ,  
+      (SELECT   MAX(price)AS high FROM se_t_traderecord  	 
+       WHERE    TO_DAYS(createTime)=TO_DAYS(NOW())
+       AND      STATUS=0                 
+       AND      marketId =n.marketId) AS high,  
+      (SELECT   MIN(price)AS low FROM se_t_traderecord  	 
+        WHERE   TO_DAYS(createTime)=TO_DAYS(NOW()) 
+         AND    STATUS=0
+         AND    marketId =n.marketId)AS low,            
+      (SELECT   SUM(number)AS tradeTotal FROM se_t_traderecord  	 
+        WHERE   TO_DAYS(createTime)=TO_DAYS(NOW())
+        AND     STATUS = 0
+        AND     marketId =n.marketId)AS tradeTotal      
+  FROM   se_t_traderecord AS n    
+   WHERE  
+      n.createTime =(SELECT DISTINCT MAX(createTime)
+                     FROM   se_t_traderecord
+                     WHERE  STATUS=0 
+		     AND    TO_DAYS(createTime)<=TO_DAYS(NOW()) 
+		     AND    marketId = #{marketId})
+     GROUP BY  n.id  DESC LIMIT 0,1)AS re 
+   ]]>
+WHERE  
+        m.id =  #{marketId}
+AND     m.tradeSign = 0
+AND     m.status    = 0    
+   
+   </select>
+   
+   <!-- 获取用户收藏行情 -->
+             
+  <select id="getOptinal" resultType="com.skyline.common.vo.TradePrecoinEntityVO">
+  select
+         s.marketId,s.precoinName,s.sufcoinName,s.createTime,re.newPrice, re.newPrice,
+        re.newTime,(re.newPrice-re.oprice)/re.oprice AS gains
+  from
+   se_t_optionalcord as s
+left join
+   <![CDATA[
+(SELECT n.price newPrice,n.createTime AS newTime, n.marketId,   
+     (SELECT o.price
+      FROM se_t_traderecord o
+       WHERE o.createTime IN
+      (SELECT MAX(createTime)
+             FROM   se_t_traderecord
+               WHERE   STATUS=0 
+		  AND  TO_DAYS(NOW())-TO_DAYS(createTime)>=1
+		  AND  marketId =n.marketId )) AS oprice      
+  FROM   se_t_traderecord AS n    
+   WHERE  
+      n.createTime IN(SELECT MAX(createTime)
+             FROM   se_t_traderecord
+               WHERE   STATUS=0 
+		  AND  TO_DAYS(createTime)<=TO_DAYS(NOW()) 
+		  GROUP BY marketId)
+   ) AS re 
+   on  s.marketId = re.marketId    
+   ]]>
+ where  s.userId = #{userId}     
+     <if test="keyword !=null and keyword !=''">
+        and (
+             precoinName like CONCAT("%",#{keyword},"%") 
+             or
+             sufcoinName like CONCAT("%",#{keyword},"%")
+        )
+     </if>
+     group by  s.precoinName 
+    <if test="type == 1 ">
+        order by sufcoinName ${sort}  
+    </if>
+    
+    <if test="type ==2 ">
+        order by newPrice ${sort}
+    </if>
+ 
+    <if test="type == 3 ">
+        order by gains ${sort}
+    </if>
+    
+  </select>
+
+   <!-- 获取交易币 -->
+   <select id="getPrecoind" resultType="com.skyline.common.vo.TradePrecoindNodeVO">
+   select precoinId,precoinName from se_t_market where tradeSign=0  and status = 0 group by precoinId
+   </select>
+   
+   <select id="getTradeCoinRate" resultType="com.skyline.common.vo.TradeCoinRateVO" 
+           parameterType="com.skyline.common.vo.TradeCoinRateVO">
+   select id as marketId,marketName,buyFee,sellFee,precoinName,sufcoinName
+   from se_t_market 
+    where 1=1
+	    <if test=" marketId != null">
+	      and id= #{marketId}
+	    </if>
+	   
+	    <if test=" marketName != null and marketName !=''">
+	       and  marketName= #{marketName}
+	    </if>
+	   <if test=" precoinName != null and precoinName !=''">
+	      and precoinName = #{precoinName}
+	    </if>
+	    <if test=" sufcoinName != null and sufcoinName !=''">
+	      and sufcoinName= #{sufcoinName}
+	    </if>
+   		 order by  marketName
+   </select>
+</mapper>

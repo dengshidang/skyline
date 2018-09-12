@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.clientService.mapper.SeTTradeinfoMapper">
+
+
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.SeTTradeinfoEntity">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+		<result column="marketId" property="marketId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="userId" property="userId" jdbcType="INTEGER" />
+		<result column="precoinId" property="precoinId" jdbcType="INTEGER" />
+		<result column="precoinName" property="precoinName" jdbcType="VARCHAR" />
+		<result column="sufcoinId" property="sufcoinId" jdbcType="INTEGER" />
+		<result column="sufcoinName" property="sufcoinName" jdbcType="VARCHAR" />
+		<result column="totalNum" property="totalNum" jdbcType="DOUBLE" />
+		<result column="dealNum" property="dealNum" jdbcType="DOUBLE" />
+		<result column="number" property="number" jdbcType="DOUBLE" />
+		<result column="dealSum" property="dealSum" jdbcType="DOUBLE" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="fee" property="fee" jdbcType="DOUBLE" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="createTime" property="createTime" jdbcType="VARCHAR" />
+		<result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!--用户委托信息 -->
+	<select id="getUserTradeEntrust" parameterType="com.skyline.common.vo.TradeUserEntrustVO"
+		resultType="com.skyline.common.vo.TradeUserEntrustVO">
+		select
+		st.id,st.marketId,sm.marketName,st.type,st.precoinId,st.precoinName,st.sufcoinId,st.sufcoinName,
+		st.totalNum,st.dealNum,st.number,st.dealSum,st.price,st.createTime,st.status
+		
+
+		from		
+		se_t_tradeinfo as st,
+		se_t_market as sm
+		where
+		   sm.id = st.marketId
+		and
+		   st.userId = #{userId}
+		<if test="userEntrust.marketId !=null ">
+			and st.marketId = #{userEntrust.marketId}
+		</if>
+        <if test="userEntrust.marketName !=null and userEntrust.marketName !=''">
+			and sm.marketName = #{userEntrust.marketName}
+		</if>
+        <if test="userEntrust.type != null">
+           and st.type  = #{userEntrust.type}
+        </if>
+		<if test="userEntrust.isCurrent == 1">
+		   <if test="userEntrust.status !=null">
+               and st.status = #{userEntrust.status}
+           </if>
+           <if test="userEntrust.status ==null">
+               and (st.status= 0 or st.status=1)
+           </if>
+			
+		</if>	
+		<if test="userEntrust.isCurrent == 2">
+		   <if test="userEntrust.status !=null">
+               and st.status = #{userEntrust.status}
+           </if>
+           <if test="userEntrust.status ==null">
+               and (st.status= 2 or st.status=3)
+           </if>
+		    
+		</if>
+       
+		<if test="userEntrust.startTime != null and userEntrust.startTime != ''">
+			and st.createTime <![CDATA[>=]]>#{userEntrust.startTime}
+			
+		</if>
+		<if test="userEntrust.endTime != null and userEntrust.endTime != ''">
+			and st.createTime <![CDATA[<=]]>#{userEntrust.endTime}
+		</if>
+        order by  st.createTime desc
+	</select>
+
+	<select id="queryTradeEnstrut" 
+		resultType="com.skyline.common.vo.MessageEntity">
+		SELECT
+		    t.marketId,t.orderNo,t.type,t.price,t.totalNum AS number,t.createTime AS sendTime
+		FROM
+		   se_t_market s
+	  right join 
+		   se_t_tradeinfo t
+		ON s.id = t.marketId
+		WHERE
+		  t.status = 0 OR t.status = 1
+
+
+	</select>
+
+
+	<select id="queryTradeByOrderNo" parameterType="java.lang.String"
+		resultMap="baseResultMap">
+		select
+			id,orderNo,userId,marketId,type,precoinId,precoinName,
+			sufcoinId,sufcoinName,totalNum,dealNum,number,dealSum,price,status,createTime
+		from
+			se_t_tradeinfo
+		where
+			orderNo = #{value}
+			and(status =0 or status = 1) 
+	</select>
+
+
+	<select id="queryTrade" resultType="com.skyline.common.vo.TradeCordDepthVO">
+		SELECT price,totalNum FROM se_t_tradeinfo WHERE
+		<if test="marketId !=null">
+			marketId = #{marketId}
+		</if>
+		<if test="type !=null ">
+			and type = #{type}
+		</if>
+	</select>
+   <!-- 绘画深度图数据-->
+   <select id="drawDepths" resultType="com.skyline.common.vo.TradeBuyAndSellVO" >
+   SELECT truncate((price*(SELECT cnyRatio FROM se_t_coinmarketprice WHERE coinId = s.precoinId AND STATUS = 0)),2) as price,
+          truncate(totalNum ,2)as amount
+		FROM
+		se_t_tradeinfo s
+		WHERE s.marketId=#{marketId} 
+		  and s.status in(0,1) 
+		  AND s.type=#{type}
+		  order by s.price desc
+   </select>
+   
+	<!--获取最新委托记录 -->
+	<select id="getNewTradeEntrust" resultType="com.skyline.common.vo.TradeEntrustEntityVO">
+		SELECT price,number,(totalNum-dealNum) as totalNum,sufcoinName,precoinName,type
+		FROM
+		<![CDATA[
+		se_t_tradeinfo
+		WHERE marketId=#{marketId} 
+		 and  status in(0,1)
+		 AND  type=#{type}
+		 AND  totalNum-dealNum >0
+		 ]]>
+		<if test="type==0">
+			order by price desc
+		</if>
+		<if test="type==1">
+			order by price asc
+		</if>
+	</select>
+
+
+	<!--kline trades数据信息 -->
+	<select id="getNewTrade" resultType="com.skyline.common.vo.TradeEntityVO">
+		SELECT dealSum AS amount,price,id AS tid,
+		UNIX_TIMESTAMP(updateTime) AS
+		time,
+		CASE s.type WHEN 0 THEN "buy" WHEN 1 THEN "sell" END AS type
+		FROM
+		se_t_tradeinfo AS s
+		WHERE marketId=#{marketId}
+		<if test="type==0 or type ==1">
+			and type = #{type}
+		</if>
+		and status in(1,2) order by updateTime desc limit 0,#{limit}
+
+	</select>
+
+</mapper>
+
+
+
+
+

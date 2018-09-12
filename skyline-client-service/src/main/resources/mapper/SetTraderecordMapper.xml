@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.clientService.mapper.SetTraderecordMapper">
+
+
+
+	<select id="selectTrdeCordByMarketAndTimeType" parameterType="com.skyline.clientService.kline.KlineParam"
+		resultType="java.util.Map">
+
+		<!--k_line -->
+		SELECT
+		W.mar, W.volume,W.avgP,W.high,W.low,
+		W.groupid*1000*(#{kp.range}) AS tradingTime,
+		(SELECT price FROM se_t_traderecord WHERE id = W.idMax)AS close,
+		(SELECT price FROM se_t_traderecord WHERE id = W.idMin)AS open
+		FROM
+		
+		(SELECT
+		COUNT(T.id)AS volume,AVG(T.price)AS avgP,MAX(T.price)AS high,MIN(T.price)AS low,
+		groupid,MAX(id)AS idMax,MIN(id)AS idMin,T.marketId AS mar
+		FROM
+		(SELECT
+		marketId,id,price,FLOOR((UNIX_TIMESTAMP(createTime)-UNIX_TIMESTAMP('1970-01-01 08:00:00'))/(#{kp.range})) AS groupid
+		FROM
+		se_t_traderecord
+		where
+		status=0
+		and
+		marketId = #{kp.symbol}
+		<if test="kp.since != null ">
+			and unix_timestamp(createTime) &gt;= (#{kp.since})/1000
+		</if>
+		<if test="kp.prevTradeTime != null ">
+			and unix_timestamp(createTime) &lt;= #{kp.prevTradeTime}
+		</if>
+		<if test="kp.limit !=null ">
+			limit 0,#{kp.limit}
+		</if>
+		) AS T
+		
+		GROUP BY T.groupid 
+		ORDER BY T.groupid 
+		)AS W
+
+
+	</select>
+
+	<select id="selectTradeCordByMarket" resultType="java.util.Map">
+		select id, marketId,price,createTime from se_t_traderecord
+		where marketId = #(marketId)
+	</select>
+	<select id="getMarketIdlist" resultType="Integer">
+		select marketId from se_t_traderecord group by marketId
+	</select>
+
+	<!--当天 实时交易记录 -->
+	<select id="getNewTradeCord" resultType="com.skyline.common.vo.TradeNewCordVO">
+		SELECT s.precoinId,s.precoinName,s.sufcoinId,s.sufcoinName, s.marketId,s.id,d.createTime AS TIME,
+		       CASE s.type WHEN 0 THEN "买入" WHEN 1 THEN "卖出" END AS TYPE,
+		       d.price,d.number
+		FROM   se_t_tradeinfo s
+		left join
+		       se_t_traderecord d
+		ON   s.marketId = d.marketId
+		WHERE 
+		       s.marketId = #{marketId}
+		AND   
+		       (s.orderNo = d.enterorderNo
+		                  OR 
+		       s.orderNo = d. outorderNo)  
+		 AND   s.STATUS IN(1,2,3)
+		 AND s.dealNum <![CDATA[<>]]> 0
+		ORDER BY s.createTime DESC,d.id DESC
+	</select>
+	<select id="getavgPriceByOrderNo" resultType="java.util.Map">
+		SELECT SUM(money)/SUM(number) AS avgPrice FROM se_t_traderecord
+		where 1=1
+		<if test=" type==0">
+			and enterorderNo = #{orderNo}
+		</if>
+		<if test=" type==1">
+			and outorderNo = #{orderNo}
+		</if>
+	</select>
+
+</mapper>

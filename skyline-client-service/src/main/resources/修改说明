@@ -1,0 +1,7 @@
+2018-8-23 下午
+
+1. 委托信息表增加字段：currentPrice (当前交易价格) 用于查询实时交易价
+2  与此同时，增加相应的 字段currentPrice 的赋值
+3. 修改查询实时委托  显示的数量计算，原：totalNum 直接返回，现：totalNum-dealNum(委托总量减去已成交量，得剩余委托量) as totalNum
+3. 
+  

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.clientService.mapper.SeTUserbalanceMapper">
+	
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.Userbalance" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="userId" property="userId" jdbcType="INTEGER" />
+	    <result column="coinId" property="coinId" jdbcType="INTEGER" />
+	    <result column="totalNum" property="totalNum" jdbcType="DOUBLE" />
+	    <result column="frozenNum" property="frozenNum" jdbcType="DOUBLE" />
+	    <result column="validNum" property="validNum" jdbcType="DOUBLE" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+	    <result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+  	</resultMap>
+	
+	
+	<sql id="base_line">
+		id,userId,coinId,totalNum,frozenNum,validNum,status,createTime,updateTime
+	</sql>
+	
+	<select id="queryUserBalance" parameterType="com.skyline.common.entity.Userbalance" resultMap="baseResultMap">
+		select
+			<include refid="base_line"/>
+		from 
+			se_t_userbalance
+		where
+			1 = 1
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="userId != null">
+				and userId = #{userId}
+			</if>
+			<if test="coinId != null">
+				and coinId = #{coinId}
+			</if>
+			<if test="status != null">
+				and status = #{status}
+			</if>
+	</select>
+	
+	
+</mapper>
