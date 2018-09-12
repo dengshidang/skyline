@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.service.mapper.SeTTradeinfoMapper">
+
+
+	<resultMap id="baseResultMap" type="com.skyline.common.entity.SeTTradeinfoEntity">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+		<result column="marketId" property="marketId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="userId" property="userId" jdbcType="INTEGER" />
+		<result column="precoinId" property="precoinId" jdbcType="INTEGER" />
+		<result column="precoinName" property="precoinName" jdbcType="VARCHAR" />
+		<result column="sufcoinId" property="sufcoinId" jdbcType="INTEGER" />
+		<result column="sufcoinName" property="sufcoinName" jdbcType="VARCHAR" />
+		<result column="totalNum" property="totalNum" jdbcType="DOUBLE" />
+		<result column="dealNum" property="dealNum" jdbcType="DOUBLE" />
+		<result column="number" property="number" jdbcType="DOUBLE" />
+		<result column="dealSum" property="dealSum" jdbcType="DOUBLE" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="fee" property="fee" jdbcType="DOUBLE" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="createTime" property="createTime" jdbcType="VARCHAR" />
+		<result column="updateTime" property="updateTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+
+	<select id="queryTradeByOrderNo" parameterType="java.lang.String"
+		resultMap="baseResultMap">
+		select
+		id,orderNo,userId,marketId,type,precoinId,precoinName,
+		sufcoinId,sufcoinName,totalNum,dealNum,number,dealSum,price,status,createTime
+		from
+		se_t_tradeinfo
+		where
+		orderNo = #{value}
+		and(status =0 or status = 1)
+	</select>
+	<select id="queryTradeEnstrut" resultType="com.skyline.common.vo.MessageEntity">
+		
+		SELECT
+		t.marketId,t.orderNo,t.type,t.price,(t.totalNum-t.dealNum) AS number,t.createTime
+		AS sendTime
+		FROM
+		se_t_market s
+		right join
+		se_t_tradeinfo t
+		ON s.id = t.marketId
+		WHERE
+		     t.status = 0 OR t.status = 1
+        AND  t.totalNum-t.dealNum &gt;0
+       
+
+	</select>
+</mapper>
+
+
+
+
+
