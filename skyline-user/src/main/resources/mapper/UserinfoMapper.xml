@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.user.mapper.UserinfoMapper">
+
+	<select id="getUserinfo"  resultType="com.skyline.common.entity.Userinfo">
+	   select * from se_t_userinfo 
+	   where 
+	   ((phone=#{account} ) or (email=#{account}))
+	   	and loginPwd=#{loginPwd}
+	   	and deleteSign=0
+	</select>
+	<select id="isRegister"  resultType="int">
+		select count(id) from se_t_userinfo
+		where  deleteSign=0
+			<if test="phone != null ">
+			    	and phone=#{phone}
+			</if>
+			<if test="email != null ">
+			    	and email=#{email}
+			</if>
+	</select>
+
+	<select id="checkPayPwd" resultType="com.skyline.common.entity.Userinfo">
+		select * from se_t_userinfo
+		where id=#{userId} 
+		and payPwd=#{payPwd}
+		and  	 deleteSign=0
+	</select>
+
+	
+	<select id="isSetPayPwd"  resultType="string" parameterType ="string">
+	select payPwd from se_t_userinfo
+	where id=#{userId,jdbcType =VARCHAR}
+	</select>
+	
+	<select id="queryUserinfoByUerId"  resultType="string" parameterType ="string">
+	select nickName from se_t_userinfo
+	where id=#{userId,jdbcType =VARCHAR}
+	and idSign = 1
+	</select>
+	
+	<update id="updateIdSign" parameterType="string">
+	  update se_t_userinfo set idSign = #{idSign,jdbcType=VARCHAR}
+	  where id = #{userId,jdbcType=VARCHAR}
+	
+	</update>
+	
+	<select id = "queryUserIdByInvite"  parameterType="string"  resultType="string"> 
+	
+	select id  from se_t_userinfo  where invit = #{parentInvite,jdbcType=VARCHAR}
+	
+	</select>
+	
+	
+	<update id="updateMctSign" parameterType="string">
+	  update se_t_userinfo set mctSign = #{mctSign,jdbcType=VARCHAR}
+	  where id = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<select id="queryUserInfoById"  parameterType="Integer"  resultType="com.skyline.common.entity.Userinfo">
+	        select 
+				  id,
+				  phone,
+				  email,
+				  nickName,
+				  portrait,
+				  sex,
+				  loginPwd,
+				  payPwd,
+				  tingPay,
+				  idSign,
+				  mctSign,
+				  charge,
+				  invit,
+				  loginSession,
+				  cla,
+				  nationality,
+				  status,
+				  logTime,
+				  createTime,
+				  updateTime,
+				  deleteSign,
+				  registerType,
+				  tradeAutomationSign
+				  from se_t_userinfo 
+				  where id=#{userId,jdbcType=VARCHAR}
+	</select>
+	
+	<update id = "bingEmail" parameterType="string">
+		update se_t_userinfo set email = #{email,jdbcType=VARCHAR}
+		 where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id = "bingPhone" parameterType="string">
+		update se_t_userinfo set phone = #{phone,jdbcType=VARCHAR}
+		 where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id = "setPayPwd"  >
+		update se_t_userinfo set payPwd = #{payPwd}
+		 where id = #{id}
+	</update>
+	
+	
+	<update id = "updatePayPwd" parameterType="string">
+		update se_t_userinfo set payPwd = #{newPayPwd,jdbcType=VARCHAR}
+		 where id = #{id,jdbcType=VARCHAR} 
+		 and payPwd=#{oldPayPwd,jdbcType=VARCHAR}
+	</update>
+	
+	<update id = "updateLoginPwd" parameterType="string">
+		update se_t_userinfo set loginPwd = #{newLoginPwd,jdbcType=VARCHAR}
+		 where id = #{id,jdbcType=VARCHAR}
+		 and loginPwd = #{oldLoginPwd,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<update id="forgetLoginPwd">
+		update se_t_userinfo set loginPwd = #{newLoginPwd}
+		<where>
+			<if test="phone!=null and phone!=''">
+				and phone = #{phone}
+			</if>
+			<if test="email!=null and email !=''">
+			  and email =#{email}
+			</if>
+		</where>
+	</update>
+	
+	
+	<update id="findPayPwd"  parameterType="string">
+		update se_t_userinfo set payPwd = #{newPayPwd}
+		<where>
+			<if test="phone!=null and phone!=''">
+				and phone = #{phone}
+			</if>
+			<if test="email!=null and email !=''">
+			  and email =#{email}
+			</if>
+		</where>
+	</update>
+	
+</mapper>

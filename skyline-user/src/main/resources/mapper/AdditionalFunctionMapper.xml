@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.user.mapper.AdditionalFunctionMapper">
+
+	<update id="updateCarouselSequence" parameterType="com.skyline.common.entity.Carousel">
+		update
+		se_t_carousel set sequence = '0'
+		where sequence =
+		#{sequence,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="insertCarouseSetUpCarousel" parameterType="com.skyline.common.entity.Carousel">
+		insert into se_t_carousel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			url,
+			path,
+			sequence,
+			<if test="title1 != null">
+				title1,
+			</if>
+			<if test="title2 != null">
+				title2,
+			</if>
+			<if test="title3 != null">
+				title3,
+			</if>
+				createTime,
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{url,jdbcType=VARCHAR},
+			#{path,jdbcType=VARCHAR},
+			#{sequence,jdbcType=VARCHAR},
+			<if test="title1 != null">
+				#{title1,jdbcType=VARCHAR},
+			</if>
+			<if test="title2 != null">
+				#{title2,jdbcType=VARCHAR},
+			</if>
+			<if test="title3 != null">
+				#{title3,jdbcType=VARCHAR},
+			</if>
+				now(),
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateNewsCarouse" parameterType="com.skyline.common.entity.Newsinfo">
+		update
+		se_t_newsinfo
+		set content = #{content,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		createTime =#{createTime,jdbcType=VARCHAR},
+		updateTime =now()
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="insertAttachment" parameterType="com.skyline.common.entity.Attachment">
+		insert into se_t_attachment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			url,
+			<if test="imgWidth != null">
+				imgWidth,
+			</if>
+			<if test="imgHeight != null">
+				imgHeight,
+			</if>
+			<if test="imgType != null">
+				imgType,
+			</if>
+			<if test="imgFrames != null">
+				imgFrames,
+			</if>
+			<if test="filesize != null">
+				filesize,
+			</if>
+			<if test="mimeType != null">
+				mimeType,
+			</if>
+			<if test="extparam != null">
+				extparam,
+			</if>
+			<if test="storage != null">
+				storage,
+			</if>
+			<if test="sha != null">
+				sha,
+			</if>
+				uploadTime,
+				createTime,
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+		
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{url,jdbcType=VARCHAR},
+			<if test="imgWidth != null">
+				#{imgWidth,jdbcType=VARCHAR},
+			</if>
+			<if test="imgHeight != null">
+				#{imgHeight,jdbcType=VARCHAR},
+			</if>
+			<if test="imgType != null">
+				#{imgType,jdbcType=VARCHAR},
+			</if>
+			<if test="imgFrames != null">
+				#{imgFrames,jdbcType=VARCHAR},
+			</if>
+			<if test="filesize != null">
+				#{filesize,jdbcType=VARCHAR},
+			</if>
+			<if test="mimeType != null">
+				#{mimeType,jdbcType=VARCHAR},
+			</if>
+			<if test="extparam != null">
+				#{extparam,jdbcType=VARCHAR},
+			</if>
+			<if test="storage != null">
+				#{storage,jdbcType=VARCHAR},
+			</if>
+			<if test="sha != null">
+				#{sha,jdbcType=VARCHAR},
+			</if>
+				now(),
+				now(),
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+	
+	<select  id="pircureShow"  resultType="com.skyline.common.entity.Carousel">
+			select  id,url,sequence,path,title1,title2,title3,createTime,updateTime
+			from se_t_carousel
+			where  sequence!='0'	
+	</select>
+	<select  id="pictureExamine"  resultType="com.skyline.common.entity.Carousel">
+			select  id,url,sequence,path,title1,title2,title3,createTime,updateTime
+			from se_t_carousel
+			<include refid="queryWhereId"/>
+			order by createTime desc
+			
+	</select>
+		<sql id="queryWhereId">
+          <where>
+            <if test="sequence!=null">
+               sequence =#{sequence}
+            </if>
+             <if test="startTime!=null and startTime!=''">
+				and createTime >=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				<![CDATA[and createTime <=#{endTime}]]>
+			</if> 
+          </where>
+		 </sql>
+
+
+</mapper>

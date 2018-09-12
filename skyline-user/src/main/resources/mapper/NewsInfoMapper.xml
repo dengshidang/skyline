@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.user.mapper.NewsInfoMapper">
+		<select  id="queryNewsCarousel" resultType="com.skyline.common.entity.Newsinfo">
+			select id,title,content,type,status,createTime,updateTime
+			from se_t_newsinfo
+			where 1=1
+			<if test="type != null ">
+			    	and type=#{type}
+			</if>
+			<if test="status != null  ">
+			    	and status=#{status}
+			</if>
+			   <if test="startTime!=null and startTime!=''">
+				and createTime >=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				<![CDATA[and createTime <=#{endTime}]]>
+			</if>
+			<if test="content!=null and content!=''">
+				 and (title like CONCAT('%', '${content}', '%')
+				 or   content like CONCAT('%', '${content}', '%'))
+			</if>	
+				order by createTime desc
+		</select>
+				
+
+</mapper>

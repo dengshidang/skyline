@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.user.mapper.UserCertifiedMapper">
+
+	<insert id="realNameCertification" parameterType="com.skyline.common.entity.Useridentitie">
+		insert into se_t_useridentitie
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			userId,
+			type,
+			idCard,
+			name,
+			IdcardImg1,
+			IdcardImg2,
+			IdcardImg3,
+			status,
+			remark,
+			createTime,
+			updateTime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userId,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{idCard,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{IdcardImg1,jdbcType=VARCHAR},
+			#{IdcardImg2,jdbcType=VARCHAR},
+			#{IdcardImg3,jdbcType=VARCHAR},
+			0,
+			#{remark,jdbcType=VARCHAR},
+			now(),
+			#{updateTime,jdbcType=VARCHAR}
+		</trim>
+	</insert>
+
+	<select id="queryCertifiedcation" parameterType="string"
+		resultType="com.skyline.common.entity.Useridentitie">
+		select
+		id,
+		userId,
+		type,
+		name,
+		idCard,
+		IdcardImg1,
+		IdcardImg2,
+		IdcardImg3,
+		status,
+		remark,
+		createTime,
+		updateTime
+		from se_t_useridentitie
+		where  1=1 
+		and sign !=1
+		<if test="status!=null ">
+	   and status
+		=#{status ,jdbcType=VARCHAR}
+		</if>
+			<if test="userId!=null ">
+				and userId = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="name!=null ">
+              	and name like concat("%",#{name},"%")
+            </if>
+			<if test="idCard!=null ">
+             	 and idCard like concat("%",#{idCard},"%")
+            </if>
+            <if test="startTime!=null and startTime!=''">
+				and createTime >=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				<![CDATA[and createTime <=#{endTime}]]>
+			</if>
+			order by createTime desc
+	</select>
+
+	<update id="updateCertifiedcation" parameterType="string">
+		update
+		se_t_useridentitie
+		set status = #{status,jdbcType = VARCHAR}
+		<if test="remark!=null">
+			, remark = #{remark,jdbcType=VARCHAR}
+	      </if>
+		where id=
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="queryBindBankInfo" parameterType="string"
+		resultType="com.skyline.common.entity.Bankinfo">
+		select id,
+		userId,
+		account,
+		name,
+		type,
+		imgUrl,
+		address,
+		bankName,
+		createTime,
+		updateTime
+		from se_t_bankinfo where userId =
+		#{userId,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="queryCertifiedcationByUerId" parameterType="string"
+		resultType="com.skyline.common.entity.Useridentitie">
+		select
+		id,
+		userId,
+		type,
+		idCard,
+		IdcardImg1,
+		IdcardImg2,
+		IdcardImg3,
+		status,
+		remark,
+		createTime,
+		updateTime
+		from se_t_useridentitie where userId
+		=#{userId ,jdbcType=VARCHAR}
+		and
+		status = 1
+	</select>
+
+
+
+	<insert id="bindBank" parameterType="com.skyline.common.entity.Bankinfo">
+		insert into
+		se_t_bankinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			userId,
+			account,
+			name,
+			type,
+			<if test="imgUrl != null">
+				imgUrl,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="bankName != null">
+				bankName,
+			</if>
+			createTime,
+			<if test="updateTime!=null">
+				updateTime
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userId,jdbcType=VARCHAR},
+			#{account,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="bankName != null">
+				#{bankName,jdbcType=VARCHAR},
+			</if>
+			now(),
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<select  id="queryUserIdByid" parameterType="string"  resultType="string">
+		select userId from  se_t_useridentitie  where id =#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select  id="queryMctIdByid" parameterType="string"  resultType="string">
+		select userId from  se_t_usercommercial  where id =#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="QueryUsercommercial"  parameterType="Map"
+		resultType="com.skyline.common.entity.UsercommercialResult">
+		select
+	      a.id,
+		  a.userId,
+		  a.videoUrl,
+		  a.dcoUrl,
+		  a.status,
+		  a.remark,
+		  a.createTime,
+		  a.updateTime,
+		  b.idCard,
+		  b.name
+		from se_t_usercommercial a   inner join se_t_useridentitie b on  a.userId = b.userId 
+		where 1=1
+		<if test="status!=null "  >
+	    and  a.status
+		=#{status ,jdbcType=VARCHAR}
+		</if>
+		<if test="userId!=null  ">
+	    and  a.userId
+		=#{userId ,jdbcType=VARCHAR}
+		</if>
+		<if test="name!=null ">
+            and name like concat("%",#{name},"%")
+        </if>
+		<if test="idCard!=null ">
+            and idCard like concat("%",#{idCard},"%")
+        </if>
+		<if test="startTime!=null  ">
+	    and a.createTime <![CDATA[>=]]> #{startTime}
+		</if>
+		<if test="endTime!=null  ">
+	    and a.createTime <![CDATA[<=]]> #{endTime}
+		</if>
+		 order by createTime desc
+	</select>
+	
+	<update id="updateBusinessStatus" parameterType="com.skyline.common.entity.Usercommercial">
+		update
+		se_t_usercommercial
+		set status = #{status,jdbcType = VARCHAR}
+		<if test="remark!=null">
+			, remark = #{remark,jdbcType=VARCHAR}
+	      </if>
+		where id=
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="businessApplication" parameterType="com.skyline.common.entity.Usercommercial">
+		insert into se_t_usercommercial
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			userId,
+			status,
+			remark,
+			createTime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userId,jdbcType=VARCHAR},
+			0,
+			#{remark,jdbcType=VARCHAR},
+			now()
+		</trim>
+	</insert>
+
+</mapper>

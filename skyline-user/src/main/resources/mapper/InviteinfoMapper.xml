@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.user.mapper.InviteinfoMapper">
+<select id="queryInvitationRecordClassOne" parameterType="string"  resultType="com.skyline.common.entity.Inviteinfo">
+  select 
+  a.id,
+  a.parentId,
+  a.parentInvite,
+  b.nickName,		
+  a.puisneId,
+  a.puisneInvite,
+  a.status,
+  a.createTime,
+  a.updateTime 
+  from  se_t_inviteinfo  a
+  left join se_t_userinfo b on  a.puisneId = b.id
+  where a.parentId=#{userId,jdbcType=VARCHAR}
+</select>
+
+<select id="queryInvitationRecordClassTwo" parameterType="string"  resultType="com.skyline.common.entity.Inviteinfo">
+  select 
+  a.id,
+  a.parentId,
+  a.parentInvite,
+  a.puisneId,
+  a.puisneInvite,
+  b.nickName,
+  a.status,
+  a.createTime,
+  a.updateTime 
+  from  se_t_inviteinfo a 
+  left join se_t_userinfo b on  a.puisneId = b.id
+  where a.parentId  in (select puisneId from se_t_inviteinfo  where parentId=#{userId,jdbcType=VARCHAR})
+  
+</select>
+
+<select id="queryInvitationRecordClassThree" parameterType="string"  resultType="com.skyline.common.entity.Inviteinfo">
+ select 
+  a.id,
+  a.parentId,
+  a.parentInvite,
+  a.puisneId,
+  b.nickName,
+  a.puisneInvite,
+  a.status,
+  a.createTime,
+  a.updateTime 
+  from  se_t_inviteinfo a 
+  left join se_t_userinfo b on  a.puisneId = b.id
+  where a.parentId in
+(select puisneId from se_t_inviteinfo  where  parentId in
+(select puisneId from se_t_inviteinfo  where parentId=#{userId,jdbcType=VARCHAR}))
+</select>
+<insert  id="addInvitationRecord"  parameterType="com.skyline.common.entity.Inviteinfo"  >
+	insert into se_t_inviteinfo 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			parentId,
+			parentInvite,
+			puisneId,
+			puisneInvite,
+			createTime
+			<if test="status!=null">
+			,status
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{parentId,jdbcType=VARCHAR},
+			#{parentInvite,jdbcType=VARCHAR},
+			#{puisneId,jdbcType=VARCHAR},
+			#{puisneInvite,jdbcType=VARCHAR},
+			now()
+			<if test="status!=null">
+			, #{status,jdbcType=VARCHAR}
+			</if>
+		</trim>
+</insert>
+</mapper>
