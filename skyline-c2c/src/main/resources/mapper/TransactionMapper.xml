@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.TransactionMapper">
+	<sql id="sql">
+		t.id,t.transactionNo,t.merchantId,t.coinId,
+		t.coinName,t.min,t.max,t.price,t.totalNum,t.finishNum,
+		t.surplusNum,t.payWay,t.status,t.transactiontypeId
+	</sql>
+	<select id="selectTransactionList" parameterType="Integer" resultType="com.skyline.common.vo.TransactionVO">
+			SELECT t.id,t.transactionNo,t.merchantId,t.coinId,
+				t.coinName,t.min,t.max,t.price,t.totalNum,
+				t.finishNum,(t.surplusNum-ifnull(t4.surplus,0)) as surplusNum,t.payWay,t.`status`,
+				t.transactiontypeId,u.nickName merchantName,
+				t1.num ,t2.completeOrderNum,t3.orderNum,
+				t.remark
+				from se_t_transaction t 
+				left join se_t_userinfo u on t.merchantId=u.id 
+			  <![CDATA[LEFT JOIN (SELECT merchantId,count(id) as num from se_t_transactionorder 
+					where `status` = 2 and (TO_DAYS(NOW()) - TO_DAYS(createTime)   <= 30) 
+					GROUP BY merchantId) t1 on  t.merchantId=t1.merchantId ]]>
+			  left join 	(SELECT merchantId,count(id)  as completeOrderNum  from se_t_transactionorder 
+						where `status` = 2 GROUP BY merchantId ) t2 on t1.merchantId=t2.merchantId 
+				left join (SELECT merchantId,count(id)  as  orderNum  from se_t_transactionorder  
+						GROUP BY merchantId) t3  
+						on t2.merchantId=t3.merchantId
+				left join (SELECT transactionNo,sum(number) as surplus   from se_t_transactionorder where (STATUS=0 or STATUS=1) GROUP  BY transactionNo) t4	
+						on t4.transactionNo=t.transactionNo		
+			  where  t.transactiontypeId=#{transactiontypeId} 
+			   and u.isLogin=1 
+			   and t.status in (0,1)
+			  <if test="payWay != '-1' ">
+				  and  t.payWay  LIKE CONCAT('%',#{payWay},'%')
+			  </if>
+			  <if test="money!=null and money!=''">
+				<![CDATA[	and   t.min<=#{money} 
+				and   t.max >= #{money}]]>
+			  </if>
+			  order by t.price 
+	</select>
+	<update id="addTransactionFinishNum">
+		update se_t_transaction
+		set finishNum=finishNum+#{num},
+		 surplusNum=surplusNum-#{num},
+		 updateTime=#{updateTime}
+      
+		where id=#{transactionId} and surplusNum>=#{num}
+	</update>
+	<update id="cancelTransaction">
+		update se_t_transaction 
+		set status=#{status},
+		updateTime=#{updateTime}
+		where id=#{transactionId} and status != 2 
+	</update>
+	<select id="getTransactionByOrderId" resultType="com.skyline.common.entity.Transaction">
+	 select <include refid="sql"/> 
+	 	from se_t_transaction t,se_t_transactionorder o
+	 	where t.transactionNo=o.transactionNo 
+	 	and o.id=#{transactionorderId}
+	</select>
+	<select id="getTransactionListByUser"  resultType="com.skyline.common.vo.TransactionVO">
+		select 
+			t.id,t.transactionNo,t.merchantId,t.coinId,
+			t.coinName,t.min,t.max,t.price,t.totalNum,
+			t.finishNum,t.surplusNum,t.payWay,t.`status`,
+			t.transactiontypeId,ty.type as transactiontype,
+			t.createTime,t.remark,t.updateTime,tab.orderInNum
+			 from se_t_transaction t 
+			 	left join  se_t_transactiontype ty on t.transactiontypeId=ty.id
+			 	left join (SELECT o.transactionNo,COUNT(id) as orderInNum from se_t_transactionorder o 
+			 			where (o.`status`=0 or o.`status`=1) and o.merchantId =#{userId} GROUP BY o.transactionNo) tab
+			 	 on t.transactionNo	=tab.transactionNo
+			 where t.merchantId=#{userId}
+			 <if test="startTime!=null and startTime!=''">
+			<![CDATA[	and t.updateTime>=#{startTime}]]>
+			 </if>
+			<if test="endTime!=null and endTime!=''">
+				<![CDATA[	and t.updateTime<=#{endTime}]]>
+			</if>
+			<if test="coinId!=null">
+				and t.coinId=#{coinId}
+			</if>
+			 order by t.id desc
+	</select>
+	<select id="findById" resultType="com.skyline.common.vo.TransactionVO">
+		select 
+			t.id,t.transactionNo,t.merchantId,t.coinId,
+			t.coinName,t.min,t.max,t.price,t.totalNum,
+			t.finishNum,t.surplusNum,t.payWay,t.`status`,
+			t.transactiontypeId,ty.type as transactiontype,
+			t.createTime,t.remark
+			 from se_t_transaction t 
+			  	left join  se_t_transactiontype ty on t.transactiontypeId=ty.id
+			 where t.id=#{id}
+	</select>
+	<select id="getTransactionForUpdate" resultType="com.skyline.common.entity.Transaction" >
+		select <include refid="sql"></include>
+		from se_t_transaction t 
+		where id=#{id} for update
+	</select>
+</mapper>

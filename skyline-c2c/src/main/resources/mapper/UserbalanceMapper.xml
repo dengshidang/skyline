@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.UserbalanceMapper">
+	<sql id="sql">
+		id,userId,coinId,totalNum,frozenNum,
+		validNum,status,createTime,updateTime
+	</sql>
+	<select id="getUserbalanceByUserIdForUpdate" resultType="com.skyline.common.entity.Userbalance">
+		select <include refid="sql"></include>
+		from se_t_userbalance 
+		where userId=#{userId}  and  coinId=#{coinId}  for update
+	</select>
+</mapper>

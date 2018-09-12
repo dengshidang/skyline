@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.TransactiontypeMapper">
+	<sql id="sql">
+		t.id,t.coinId,t.coinName,t.buyMin,t.buyMax,
+		t.sellMin,t.sellMax,t.type,t.status
+	</sql>
+	<select id="selectTransactiontype"  parameterType="Integer" resultType="com.skyline.common.entity.Transactiontype">
+			select 
+			<include refid="sql"/>
+			 from se_t_transactiontype t
+			  left join  se_t_transaction tran
+			  	on t.id=tran.transactiontypeId
+			  left join  se_t_transactionorder o
+			    on tran.transactionNo=o.transactionNo
+			 where o.id=#{transactionorderId}
+	</select>
+	
+</mapper>

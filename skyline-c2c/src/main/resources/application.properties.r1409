@@ -1,0 +1,4 @@
+#加载 application-dev.properties 配置文件  
+#生产环境改成 spring.profiles.active=prod 即可
+spring.profiles.active=prod
+#spring.profiles.active=dev

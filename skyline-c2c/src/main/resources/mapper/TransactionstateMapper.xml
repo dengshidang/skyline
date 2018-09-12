@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.TransactionstateMapper">
+	
+	<update id="examineTransactionstate">
+		update se_t_transactionstate 
+		set status=#{status},
+		updateTime=#{updateTime}
+		where id=#{transactionstateId} 
+			and status  =#{currStatus}
+	</update>
+	<select id="getCountTransactionstateByOrderId"  resultType="Integer">
+		select count(id) from se_t_transactionstate where orderNo=#{orderNo} 
+		and stateUser=#{uid}
+		and (status=0 or status=1 or status =2)
+	</select>
+	<select id="getListTransactionstate"  resultType="com.skyline.common.vo.TransactionstateVO">
+			select 
+			 s.id, s.orderNo,s.stateUser,u1.nickName as stateUserName,  
+			CASE WHEN u1.registerType=0 THEN u1.phone ELSE u1.email END as stateUserAccount,
+			s.takeUser,u2.nickName as takeUserName,
+			CASE WHEN u2.registerType=0 THEN u2.phone ELSE u2.email END as takeUserAccount,
+			s.proveUrl,s.content,
+			s.coinId,s.coinName,s.number,s.price,s.totalPrice,s.payWay payWayId,b.type as payWayType,
+			s.status,s.createTime,s.updateTime
+			 from se_t_transactionstate  s 
+		LEFT JOIN se_t_userinfo u1 on  s.stateUser=u1.id 
+		LEFT JOIN	se_t_userinfo u2 on  s.takeUser=u2.id		
+		LEFT JOIN  se_t_bankinfo b  on b.id=s.payWay
+		<where>
+			<if test="orderNo!=null and orderNo!=''">
+			 and 	s.orderNo    LIKE '%${orderNo}%'
+			</if>
+			<if test="stateUserAccount!=null and stateUserAccount!=''">
+			 and 	CASE WHEN u1.registerType=0 THEN u1.phone ELSE u1.email END   LIKE  CONCAT('%',#{stateUserAccount},'%')
+			</if>
+			<if test="takeUserAccount!=null and takeUserAccount!=''">
+			 and	CASE WHEN u2.registerType=0 THEN u2.phone ELSE u2.email END   LIKE CONCAT('%',#{takeUserAccount},'%')
+			</if>
+			<if test="payWayType!=null ">
+			   and 	b.type =#{payWayType}
+			</if>
+			<if test="status!=null ">
+				and s.status =#{status}
+			</if>
+			<if test="startTime!=null and startTime!=''">
+				and s.createTime >=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+			  <![CDATA[	and s.createTime <=#{endTime}]]>
+			</if>
+		</where>
+	</select>
+	<select id="getTransactionstateByOrderNo"  resultType="com.skyline.common.entity.Transactionstate">
+	   select  
+	   id,orderNo,stateUser,takeUser,proveUrl,
+	   coinId,coinName,number,totalPrice,payWay,
+	   status,createTime,updateTime,remark,content,
+	   price  
+	   from se_t_transactionstate  where orderNo=#{orderNo} 
+	   and stateUser=#{userId}  and status=#{status}
+	</select>
+</mapper>

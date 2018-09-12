@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.BankinfoMapper">
+	<sql id="sql">
+		b.id,b.userId,b.account,b.name,b.type,b.imgUrl,
+		b.address,b.bankName,b.createTime,b.updateTime
+	</sql>
+
+	<select id="getBankinfoByUser" resultType="com.skyline.common.entity.Bankinfo">
+		select <include refid="sql"></include>
+		from se_t_bankinfo b
+		where b.userId=#{userId} 
+		order by  b.type
+	</select>
+	<select id="getBankinfoByTransactionNo"  resultType="com.skyline.common.entity.Bankinfo">
+	 select <include refid="sql"></include>
+		 from se_t_bankinfo b,se_t_transaction t 
+		where b.userId=t.merchantId  
+		and	t.transactionNo=#{transactionNo}
+		and t.payWay like CONCAT('%',b.type,'%') 
+		order by  b.type
+	</select>
+	<select id="getBankinfoByType"  resultType="com.skyline.common.entity.Bankinfo">
+			select <include refid="sql"></include>
+		from se_t_bankinfo b
+		where b.userId=#{userId} and  b.type=#{type}
+	</select>
+</mapper>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.TransactionorderMapper">
+
+	<sql id="sql">
+		o.id,o.orderNo,o.transactionNo,o.merchantId,
+		o.merchantId,o.userId,o.number,o.totalPrice,
+		o.payWay,o.remarkCode,o.remarkCode,o.status,
+		o.createTime,o.updateTime
+	</sql>
+	<update id="updateStatus">
+		update se_t_transactionorder set status=#{status},
+		<if test="status==1">
+		  makeTime=#{updateTime},
+		</if>
+		<if test="imgUrl != null">
+			  imgUrl=#{imgUrl},
+		</if>
+		<if test="payWay != null">
+			  payWay=#{payWay},
+		</if>
+		 updateTime=#{updateTime}
+		where status=${currStatus} and id=#{transactionorderId} 
+	</update>
+	<update id="updateIsAppeal">
+		update se_t_transactionorder set isAppeal=#{isAppeal},
+		updateTime=#{updateTime}
+		where isAppeal=${currIsAppeal} and id=#{transactionorderId} 
+	</update>
+	
+	<select id="getCountOrderNumber" resultType="Double">
+		SELECT SUM(number) FROM se_t_transactionorder 
+		where transactionNo=#{transactionNo} and (`status`=0 or  `status` = 1 )
+	</select>
+	<select id="getTransactionorderByStateId"  resultType="com.skyline.common.entity.Transactionorder">
+		select <include refid="sql"></include>
+		from se_t_transactionorder o ,se_t_transactionstate s 
+		where o.orderNo=s.orderNo 
+		 and s.id=#{transactionstateId}
+	</select>
+	<select id="getTransactionorderList"  resultType="com.skyline.common.vo.TransactionorderVO">
+			select 
+		 o.id,o.orderNo,o.transactionNo,o.merchantId,u.nickName as  merchantName,
+     		t.coinId,t.coinName,t.id as transactionTypeId,ty.type as transactionType,o.number,  
+     		o.price,o.totalPrice,o.payWay,o.remarkCode,o.status,o.createTime,o.updateTime,o.makeTime
+			from se_t_transactionorder o ,
+				se_t_transaction t,
+				se_t_transactiontype ty,
+				se_t_userinfo u
+			 where o.transactionNo=t.transactionNo 
+         		and ty.id=t.transactiontypeId 
+				and o.merchantId=u.id
+				and o.userId=#{userId}
+				<if test="coinId!=null">
+					and t.coinId=#{coinId}
+				</if>
+				<if test="status!=null">
+					<if test="status==1">  and (o.status=2 or o.status=5)</if>
+					<if test="status==2">  and o.status=0</if>
+					<if test="status==3">  and o.status=1 </if>
+					<if test="status==4">  and (o.status=3 or o.status=4)</if>
+				</if>
+				<if test="type!=null">
+					and ty.type=#{type}
+				</if>
+				<if test="startTime!=null and startTime!=''">
+				<![CDATA[	and o.updateTime>=#{startTime}]]>
+				 </if>
+				<if test="endTime!=null and endTime!=''">
+					<![CDATA[	and o.updateTime<=#{endTime}]]>
+				</if>
+				    order by o.id desc 	   
+	</select>
+	<select id="getTransactionorderInCountByUser" resultType="int">
+		select count(id) from se_t_transactionorder 
+		where userId=#{userId} 
+		and status  in(0,1)
+	</select>
+	<select id="getAutoCancelOrder" resultType="com.skyline.common.entity.Transactionorder">
+			select id,status,merchantId,userId from  se_t_transactionorder
+			where  status=${currStatus} 
+			and TIMESTAMPDIFF(SECOND, createTime, CURRENT_TIMESTAMP())>#{time}
+	</select>
+	<select id="autoUpdateOrderStatusStayState" resultType="com.skyline.common.entity.Transactionorder">
+			select id,status,merchantId,userId from  se_t_transactionorder
+			where  status=${currStatus} 
+			and TIMESTAMPDIFF(SECOND, makeTime, CURRENT_TIMESTAMP())>#{time}
+	</select>
+	<select id="auotUpdateOrderStatusExceptionClose" resultType="com.skyline.common.entity.Transactionorder">
+			select id,status,merchantId,userId from  se_t_transactionorder
+			where  status=${currStatus} 
+			and TIMESTAMPDIFF(SECOND, makeTime, CURRENT_TIMESTAMP())>#{time}
+	</select>
+	<select id="getSumNumberByIn"  resultType="Double">
+				SELECT sum(number) as sum from se_t_transactionorder where transactionNo=#{transactionNo} and `status` in (1,2,5,6)
+	</select>
+	<select id="getTransactionorderListByTransaction" resultType="com.skyline.common.vo.TransactionorderVO" >
+		select 
+		 o.id,o.orderNo,o.transactionNo,o.merchantId,o.userId,u.nickName userName,
+     		t.coinId,t.coinName,t.id as transactionTypeId,ty.type as transactionType,o.number,  
+     		o.price,o.totalPrice,o.payWay,o.remarkCode,o.status,o.createTime,o.updateTime,o.makeTime
+			from se_t_transactionorder o ,
+				se_t_transaction t,
+				se_t_transactiontype ty,
+				se_t_userinfo u
+			 where o.transactionNo=t.transactionNo 
+         and ty.id=t.transactiontypeId 
+				  and o.userId=u.id
+				   and t.id=#{transactionId} 
+			  order by o.id desc 	   
+	</select>
+	<select id="getTransactionorderById"  resultType="com.skyline.common.vo.TransactionorderVO">
+	select 
+		 o.id,o.orderNo,o.transactionNo,o.merchantId,mu.nickName merchantName,o.userId,u.nickName userName,
+     		t.coinId,t.coinName,t.id as transactionTypeId,ty.type as transactionType,o.number,  
+     		o.price,o.totalPrice,o.payWay,o.remarkCode,o.status,o.createTime,o.updateTime,o.makeTime,o.imgUrl,o.isAppeal
+			from se_t_transactionorder o ,
+				se_t_transaction t,
+				se_t_transactiontype ty,
+				se_t_userinfo u,
+				se_t_userinfo mu
+			 where o.transactionNo=t.transactionNo 
+         and ty.id=t.transactiontypeId 
+				  and o.userId=u.id
+				  and o.merchantId=mu.id
+				   and o.id=#{id}
+	</select>
+	<!-- 正在处理的订单id -->
+	<select id="getIdsByUserId"    resultType="Integer">
+	select o.id from se_t_transactionorder o 
+	where 	(o.status=0 or o.status=1) and ( o.merchantId=#{userId} or o.userId=#{userId})  
+	</select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyline.c2c.mapper.TransactionMessageMapper">
+	<sql id="sql">
+		m.id,m.message,m.orderId,m.senderId,m.recipientId,m.createTime
+	</sql>
+	<select id="getMessageList"  resultType="com.skyline.common.entity.TransactionMessage">
+	 select <include refid="sql"></include>
+		 from se_t_transaction_message m
+		 where m.orderId =#{orderId} and (m.senderId=#{userId}  or  m.recipientId =#{userId})
+	</select>
+</mapper>
